@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  publicPath: '/upc-frontsoft',
+  publicPath: '/',
   lintOnSave: false,
   css: {
     loaderOptions: {
@@ -11,6 +11,10 @@ module.exports = {
         },
       },
     },
+  },
+  devServer: {
+    compress: true,
+    disableHostCheck: true,
   },
   configureWebpack: {
     resolve: {
