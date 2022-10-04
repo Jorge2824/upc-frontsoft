@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-  publicPath: '/',
+  publicPath: '/upc-frontsoft',
   lintOnSave: false,
   css: {
     loaderOptions: {
