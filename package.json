@@ -1,8 +1,11 @@
 {
-  "name": "vuexy-vuejs-react-html-laravel-admin-dashboard-template",
+  "name": "upc-frontsoft",
   "version": "6.4.0",
   "private": true,
+  "homepage": "http://jorge2824.github.io/upc-frontsoft",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -28,6 +31,7 @@
     "chart.js": "2.9.4",
     "core-js": "3.8.1",
     "echarts": "4.8.0",
+    "gh-pages": "^4.0.0",
     "jsonwebtoken": "8.5.1",
     "leaflet": "1.6.0",
     "npm": "^6.0.0",
