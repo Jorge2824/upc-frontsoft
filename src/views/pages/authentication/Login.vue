@@ -4,9 +4,13 @@
 
       <!-- Brand logo-->
       <b-link class="brand-logo">
-        <vuexy-logo />
+        <b-img
+          :src="appLogoImage"
+          alt="logo"
+          width="40px"
+        />
         <h2 class="brand-text text-primary ml-1">
-          Vuexy
+          UPC
         </h2>
       </b-link>
       <!-- /Brand logo-->
@@ -41,7 +45,7 @@
             class="mb-1 font-weight-bold"
             title-tag="h2"
           >
-            Welcome to Vuexy! 👋
+            Welcome to UPC! 👋
           </b-card-title>
           <b-card-text class="mb-2">
             Please sign-in to your account and start the adventure
@@ -221,7 +225,7 @@ import { required, email } from '@validations'
 import { togglePasswordVisibility } from '@core/mixins/ui/forms'
 import store from '@/store/index'
 import { getHomeRouteForLoggedInUser } from '@/auth/utils'
-
+import { $themeConfig } from '@themeConfig'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
@@ -247,13 +251,21 @@ export default {
     ValidationProvider,
     ValidationObserver,
   },
+  setup() {
+    // App Name
+    const { appName, appLogoImage } = $themeConfig.app
+    return {
+      appName,
+      appLogoImage,
+    }
+  },
   mixins: [togglePasswordVisibility],
   data() {
     return {
       status: '',
       password: 'admin',
       userEmail: 'admin@demo.com',
-      sideImg: require('@/assets/images/pages/login-v2.svg'),
+      sideImg: require('@/assets/images/pages/share-portal.png'),
 
       // validation rules
       required,
@@ -267,7 +279,7 @@ export default {
     imgUrl() {
       if (store.state.appConfig.layout.skin === 'dark') {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.sideImg = require('@/assets/images/pages/login-v2-dark.svg')
+        this.sideImg = require('@/assets/images/pages/share-portal.png')
         return this.sideImg
       }
       return this.sideImg

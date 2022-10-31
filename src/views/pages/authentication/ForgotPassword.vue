@@ -4,10 +4,13 @@
 
       <!-- Brand logo-->
       <b-link class="brand-logo">
-        <vuexy-logo />
-
+        <b-img
+          :src="appLogoImage"
+          alt="logo"
+          width="40px"
+        />
         <h2 class="brand-text text-primary ml-1">
-          Vuexy
+          UPC
         </h2>
       </b-link>
       <!-- /Brand logo-->
@@ -102,6 +105,7 @@ import {
 } from 'bootstrap-vue'
 import { required, email } from '@validations'
 import store from '@/store/index'
+import { $themeConfig } from '@themeConfig'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 
 export default {
@@ -119,6 +123,14 @@ export default {
     BCardText,
     ValidationProvider,
     ValidationObserver,
+  },
+  setup() {
+    // App Name
+    const { appName, appLogoImage } = $themeConfig.app
+    return {
+      appName,
+      appLogoImage,
+    }
   },
   data() {
     return {
