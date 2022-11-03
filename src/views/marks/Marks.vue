@@ -1,22 +1,21 @@
 <template>
   <div>
-    <b-button @click="searchMarks()">Click to show</b-button>
-    <div v-if="courses.length > 0">
-        <ul>
-            <li v-for="(course, index) in courses" :key="index">
-                <span>{{course.name}}</span>
-            </li>
-        </ul>
-    </div>
     <section class="grid-view">
+    <b-overlay
+      :show="isRefreshing"
+      rounded="sm"
+    >
       <b-card
         v-for="(course,index) in courses"
+        :aria-hidden="isRefreshing ? 'true' : null"
         :key="index"
         class="ecommerce-card"
+        :actionRefresh="isRefreshing"
+        
         no-body
       >
         <!-- Product Details -->
-        <b-card-body>
+        <b-card-body @click="searchMarks(course.parent_id)" style="cursor: pointer;">
           <h6 class="item-name">
             <b-link
               class="text-body"
@@ -45,6 +44,7 @@
           </div>
         </div>
       </b-card>
+    </b-overlay>
     </section>
   </div>
 </template>
@@ -54,23 +54,30 @@ import MarkService from "./marks.services"
 export default {
     data() {
         return{
-            courses: []
+            courses: [],
+            isRefreshing: false,
         }
     },
     methods:{
-        async searchMarks(){
+        async searchMarks(item){
+          this.isRefreshing = true
             try {
-                const data = await MarkService.searchCourses()
+                let params = {
+                  parent_id: item ? item : 0
+                }
+                const data = await MarkService.searchCourses(params)
                 if(data.status === 200) {
                     this.courses = data.data
                 }
+                this.isRefreshing = false
             } catch (e) {
                 console.log(e);
+                this.isRefreshing = false
             }
         },
     },
     async mounted() {
-        await this.searchMarks();
+        await this.searchMarks(null);
     }
 }
 </script>

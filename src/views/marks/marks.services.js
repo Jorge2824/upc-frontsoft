@@ -1,9 +1,9 @@
 import HttpRequest from "@/http-common";
 
 class MarksServices {
-    async searchCourses() {
+    async searchCourses(data) {
         try {
-            const response = await HttpRequest.get("/courses")
+            const response = await HttpRequest.post("/courses", data)
             if (response.status === 200) {
                 return response
             }
